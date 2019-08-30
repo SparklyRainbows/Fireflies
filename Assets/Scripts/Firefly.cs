@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragAndDrop : MonoBehaviour
+public class Firefly : MonoBehaviour
 {
+    public int location;
+
     float distance;
     bool dragging;
 
@@ -29,8 +31,6 @@ public class DragAndDrop : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 rayPoint = ray.GetPoint(distance);
         transform.position = rayPoint;
-
-        //Snap();
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
@@ -42,15 +42,10 @@ public class DragAndDrop : MonoBehaviour
 
     private void Snap(GameObject obj) {
         var currentPos = obj.transform.position;
-        transform.position = new Vector3(Mathf.Round(currentPos.x),
-                                     Mathf.Round(currentPos.y),
-                                     Mathf.Round(currentPos.z));
+        transform.position = new Vector3(Mathf.Round(currentPos.x), Mathf.Round(currentPos.y), Mathf.Round(currentPos.z));
     }
 
-    private void Snap() {
-        var currentPos = transform.position;
-        transform.position = new Vector3(Mathf.Round(currentPos.x),
-                                     Mathf.Round(currentPos.y),
-                                     Mathf.Round(currentPos.z));
+    public bool IsDragging() {
+        return dragging;
     }
 }
