@@ -42,6 +42,10 @@ public class Firefly : MonoBehaviour
         transform.position = rayPoint;
     }
 
+    private void OnTriggerExit2D(Collider2D collision) {
+        location = -1;
+    }
+
     private void OnTriggerStay2D(Collider2D collision) {
         if (dragging)
             return;

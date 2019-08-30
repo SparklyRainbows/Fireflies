@@ -7,8 +7,7 @@ public class Grid : MonoBehaviour
     public static Grid instance = null;
 
     public GameObject[] spaces;
-
-    private List<int> occupied;
+    public List<Firefly> fireflies;
 
     void Awake() {
         if (instance == null) {
@@ -18,25 +17,27 @@ public class Grid : MonoBehaviour
         }
     }
 
-    private void Start() {
-        occupied = new List<int>();
-    }
-
     /// <summary>
     /// Returns if space is occupied by a firefly or lit by a light beam
     /// </summary>
     public bool IsSpaceOccupied(int space) {
-        return occupied.Contains(space) || spaces[space].GetComponent<GridSpace>().IsLit();
+        bool occupiedByFirefly = false;
+        foreach (Firefly firefly in fireflies) {
+            if (firefly.location == space) {
+                occupiedByFirefly = true;
+                break;
+            }
+        }
+
+        return occupiedByFirefly || spaces[space].GetComponent<GridSpace>().IsLit();
     }
 
     public void UpdateFireflyLocation(string spaceName, GameObject firefly) {
         Firefly fireflyScript = firefly.GetComponent<Firefly>();
-
-        occupied.Remove(fireflyScript.location);
+        
         //HideGridColor(fireflyScript.location);
         
         fireflyScript.location = int.Parse(spaceName);
-        occupied.Add(fireflyScript.location);
         
         ShowGridColor(fireflyScript.color, fireflyScript.location);
     }
