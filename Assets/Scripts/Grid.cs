@@ -8,6 +8,8 @@ public class Grid : MonoBehaviour
 
     public GameObject[] spaces;
 
+    private List<int> occupied;
+
     void Awake() {
         if (instance == null) {
             instance = this;
@@ -16,12 +18,22 @@ public class Grid : MonoBehaviour
         }
     }
 
+    private void Start() {
+        occupied = new List<int>();
+    }
+
+    public bool IsSpaceOccupied(int space) {
+        return occupied.Contains(space);
+    }
+
     public void UpdateFireflyLocation(string spaceName, GameObject firefly) {
         Firefly fireflyScript = firefly.GetComponent<Firefly>();
 
+        occupied.Remove(fireflyScript.location);
         //HideGridColor(fireflyScript.location);
 
         fireflyScript.location = int.Parse(spaceName);
+        occupied.Add(fireflyScript.location);
 
         ShowGridColor(fireflyScript.color, fireflyScript.location);
     }

@@ -10,14 +10,20 @@ public class Firefly : MonoBehaviour
     float distance;
     bool dragging;
 
+    Vector3 originalPos;
+
     Transform transform;
 
     private void Start() {
+        GetComponent<SpriteRenderer>().color = color;
+
         transform = gameObject.transform;
     }
 
     private void OnMouseDown() {
         Grid.instance.HideGridColor(location);
+
+        originalPos = transform.position;
 
         distance = Vector3.Distance(transform.position, Camera.main.transform.position);
         dragging = true;
@@ -40,7 +46,14 @@ public class Firefly : MonoBehaviour
         if (dragging)
             return;
 
-        Snap(collision.gameObject);
+        int space = int.Parse(collision.gameObject.name);
+
+        if (location != space && Grid.instance.IsSpaceOccupied(space)) {
+            transform.position = originalPos;
+        } else {
+            Snap(collision.gameObject);
+            Grid.instance.UpdateFireflyLocation(collision.gameObject.name, gameObject);
+        }
     }
 
     private void Snap(GameObject obj) {
