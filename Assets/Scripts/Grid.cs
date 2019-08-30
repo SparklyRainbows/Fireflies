@@ -19,7 +19,7 @@ public class Grid : MonoBehaviour
     public void UpdateFireflyLocation(string spaceName, GameObject firefly) {
         Firefly fireflyScript = firefly.GetComponent<Firefly>();
 
-        HideGridColor(fireflyScript.location);
+        //HideGridColor(fireflyScript.location);
 
         fireflyScript.location = int.Parse(spaceName);
 
@@ -31,7 +31,7 @@ public class Grid : MonoBehaviour
     //FIX ME
     //++++++++++++++++++++++++++++
     //
-    private void HideGridColor(int location) {
+    public void HideGridColor(int location) {
         //Horizontal
         if (location < 3) {
             HideHorizontal(0);

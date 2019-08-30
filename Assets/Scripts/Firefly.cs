@@ -17,6 +17,8 @@ public class Firefly : MonoBehaviour
     }
 
     private void OnMouseDown() {
+        Grid.instance.HideGridColor(location);
+
         distance = Vector3.Distance(transform.position, Camera.main.transform.position);
         dragging = true;
     }
