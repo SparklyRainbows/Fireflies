@@ -22,8 +22,11 @@ public class Grid : MonoBehaviour
         occupied = new List<int>();
     }
 
+    /// <summary>
+    /// Returns if space is occupied by a firefly or lit by a light beam
+    /// </summary>
     public bool IsSpaceOccupied(int space) {
-        return occupied.Contains(space);
+        return occupied.Contains(space) || spaces[space].GetComponent<GridSpace>().IsLit();
     }
 
     public void UpdateFireflyLocation(string spaceName, GameObject firefly) {
@@ -31,10 +34,10 @@ public class Grid : MonoBehaviour
 
         occupied.Remove(fireflyScript.location);
         //HideGridColor(fireflyScript.location);
-
+        
         fireflyScript.location = int.Parse(spaceName);
         occupied.Add(fireflyScript.location);
-
+        
         ShowGridColor(fireflyScript.color, fireflyScript.location);
     }
     

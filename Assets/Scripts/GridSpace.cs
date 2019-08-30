@@ -12,6 +12,10 @@ public class GridSpace : MonoBehaviour
         vertical = transform.Find("Vertical").GetComponent<SpriteRenderer>();
     }
 
+    public bool IsLit() {
+        return horizontal.enabled || vertical.enabled;
+    }
+
     public void ShowHorizontal(Color color) {
         horizontal.enabled = true;
         horizontal.color = color;
