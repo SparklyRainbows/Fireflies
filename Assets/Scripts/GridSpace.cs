@@ -32,7 +32,7 @@ public class GridSpace : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Firefly") && !collision.gameObject.GetComponent<Firefly>().IsDragging()) {
-            Grid.instance.UpdateFirefly(gameObject.name, collision.gameObject);
+            Grid.instance.UpdateFireflyLocation(gameObject.name, collision.gameObject);
         }
     }
 }

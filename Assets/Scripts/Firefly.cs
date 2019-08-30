@@ -5,6 +5,7 @@ using UnityEngine;
 public class Firefly : MonoBehaviour
 {
     public int location;
+    public Color color = Color.red;
 
     float distance;
     bool dragging;
