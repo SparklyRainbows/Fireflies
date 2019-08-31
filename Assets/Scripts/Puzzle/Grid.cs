@@ -36,6 +36,27 @@ public class Grid : MonoBehaviour
             new List<int>() { 2, 5, 7});
     }
 
+    //Resets firefly positions, removes all light
+    public void Reset() {
+        //Reset firefly position
+        float yPos = 3f;
+        foreach (Firefly firefly in fireflies) {
+            firefly.gameObject.transform.localPosition = new Vector2(5, yPos);
+            yPos -= 1.5f;
+        }
+
+        //Remove all light
+        foreach (GridSpace space in spaces) {
+            space.HideHorizontal();
+            space.HideVertical();
+        }
+
+        //Reset all targets
+        foreach (Target target in targets) {
+            target.SetLight(false, Color.white);
+        }
+    }
+
     private void CreateGrid(int size) {
         this.size = size;
         spaces = new GridSpace[size * size];
