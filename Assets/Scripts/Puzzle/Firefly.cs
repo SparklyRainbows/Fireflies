@@ -26,13 +26,13 @@ public class Firefly : MonoBehaviour
 
     private void SetColor() {
         switch(gameObject.name) {
-            case ("Red"):
+            case ("red"):
                 myColor = new MyColor(ColorName.RED);
                 return;
-            case ("Blue"):
+            case ("blue"):
                 myColor = new MyColor(ColorName.BLUE);
                 return;
-            case ("Yellow"):
+            case ("yellow"):
                 myColor = new MyColor(ColorName.YELLOW);
                 return;
             default:
@@ -85,7 +85,7 @@ public class Firefly : MonoBehaviour
 
     private void Snap(GameObject obj) {
         var currentPos = obj.transform.position;
-        transform.position = new Vector3(Mathf.Round(currentPos.x), Mathf.Round(currentPos.y), Mathf.Round(currentPos.z));
+        transform.position = new Vector3(currentPos.x, currentPos.y, currentPos.z);
 
         snapped = true;
     }

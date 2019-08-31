@@ -27,22 +27,85 @@ public class Grid : MonoBehaviour
     private void Start() {
         GameControl gc = GameObject.Find("GameControl").GetComponent<GameControl>();
 
-        size = gc.gridSize;
-        CreateGrid();
-        CreateFireflies();
-        CreateTargets();
+        //CreateGrid(gc.gridSize);
+        //CreateFireflies(gc.fireflies);
+        //CreateTargets(gc.targetColors, gc.targetLocations);
+        CreateGrid(3);
+        CreateFireflies(new List<ColorName>() { ColorName.RED, ColorName.BLUE, ColorName.RED});
+        CreateTargets(new List<ColorName>() { ColorName.BLUE, ColorName.RED, ColorName.RED},
+            new List<int>() { 2, 5, 7});
     }
 
-    private void CreateGrid() {
+    private void CreateGrid(int size) {
+        this.size = size;
+        spaces = new GridSpace[size * size];
 
+        //Row
+        float yPos = 4.5f - (9.0f / size / 2);
+        for (int i = 0; i < size; i++) {
+            float xPos = -4.5f + (9.0f / size / 2);
+
+            //Col
+            for (int j = 0; j < size; j++) {
+                GameObject space = CreateSpace(i * size + j, xPos, yPos);
+                spaces[i * size + j] = space.GetComponent<GridSpace>();
+                xPos += 9.0f / size;
+            }
+
+            yPos -= 9.0f / size;
+        }
     }
 
-    private void CreateFireflies() {
+    private GameObject CreateSpace(int spaceNum, float xPos, float yPos) {
+        GameObject space = Instantiate(gridSpace, gameObject.transform);
 
+        space.transform.localScale = new Vector2(9f / size, 9f / size);
+        space.transform.localPosition = new Vector2(xPos, yPos);
+        space.name = spaceNum.ToString();
+
+        return space;
     }
 
-    private void CreateTargets() {
+    private void CreateFireflies(List<ColorName> fireflyColors) {
+        fireflies = new List<Firefly>();
 
+        float yPos = 3f;
+        foreach (ColorName fireflyColor in fireflyColors) {
+            GameObject temp = CreateFirefly(fireflyColor, yPos);
+            fireflies.Add(temp.GetComponent<Firefly>());
+            yPos -= 1.5f;
+        }
+    }
+
+    private GameObject CreateFirefly(ColorName fireflyColor, float yPos) {
+        GameObject temp = Instantiate(firefly, GameObject.Find("Fireflies").transform);
+
+        temp.transform.localPosition = new Vector2(5, yPos);
+        temp.name = fireflyColor.ToString().ToLower();
+
+        return temp;
+    }
+
+    private void CreateTargets(List<ColorName> targetColors, List<int> targetPositions) {
+        targets = new List<Target>();
+
+        for (int i = 0; i < targetPositions.Count; i++) {
+            GameObject temp = CreateTarget(targetColors[i], targetPositions[i]);
+
+            Target script = temp.GetComponent<Target>();
+            targets.Add(script);
+            script.SetColor();
+            script.location = targetPositions[i];
+        }
+    }
+
+    private GameObject CreateTarget(ColorName targetColor, int position) {
+        GameObject temp = Instantiate(target, GameObject.Find("Targets").transform);
+        
+        temp.transform.localPosition = spaces[position].gameObject.transform.position;
+        temp.name = targetColor.ToString().ToLower() + "Target";
+
+        return temp;
     }
 
     /// <summary>

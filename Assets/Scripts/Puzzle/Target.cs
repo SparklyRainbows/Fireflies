@@ -6,32 +6,35 @@ public class Target : MonoBehaviour
 {
     public int location = -1;
     MyColor myColor;
-
+    
     SpriteRenderer correctSprite;
     SpriteRenderer incorrectSprite;
 
     private void Start() {
-        SetColor();
-
         correctSprite = transform.Find("Correct").GetComponent<SpriteRenderer>();
         incorrectSprite = transform.Find("Incorrect").GetComponent<SpriteRenderer>();
     }
 
-    private void SetColor() {
+    public void SetColor() {
         switch(gameObject.name) {
-            case ("RedTarget"):
-                myColor = new MyColor(ColorName.RED);
+            case ("redTarget"):
+                SetColor(ColorName.RED);
                 return;
-            case ("BlueTarget"):
-                myColor = new MyColor(ColorName.BLUE);
+            case ("blueTarget"):
+                SetColor(ColorName.BLUE);
                 return;
-            case ("YellowTarget"):
-                myColor = new MyColor(ColorName.YELLOW);
+            case ("yellowTarget"):
+                SetColor(ColorName.YELLOW);
                 return;
             default:
                 Debug.LogWarning($"Target name not found: {gameObject.name}");
                 return;
         }
+    }
+
+    private void SetColor(ColorName color) {
+        myColor = new MyColor(color);
+        GetComponent<SpriteRenderer>().color = myColor.GetColor();
     }
 
     public void SetLight(bool isLit, Color spaceColor) {
