@@ -45,3 +45,6 @@ TagManager:
   - name: Fireflies
     uniqueID: 3599173509
     locked: 0
+  - name: Targets
+    uniqueID: 1200134245
+    locked: 0

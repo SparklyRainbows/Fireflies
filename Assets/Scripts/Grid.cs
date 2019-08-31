@@ -6,8 +6,9 @@ public class Grid : MonoBehaviour
 {
     public static Grid instance = null;
 
-    public GameObject[] spaces;
+    public GridSpace[] spaces;
     public List<Firefly> fireflies;
+    public List<Target> targets;
 
     void Awake() {
         if (instance == null) {
@@ -18,28 +19,28 @@ public class Grid : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns if space is occupied by a firefly or lit by a light beam
+    /// Returns if space is occupied by a firefly or lit by a light beam or occupied by a target
     /// </summary>
     public bool IsSpaceOccupied(int space) {
-        bool occupiedByFirefly = false;
         foreach (Firefly firefly in fireflies) {
             if (firefly.location == space) {
-                occupiedByFirefly = true;
-                break;
+                return true;
+            }
+        }
+        
+        foreach(Target target in targets) {
+            if (target.location == space) {
+                return true;
             }
         }
 
-        return occupiedByFirefly || spaces[space].GetComponent<GridSpace>().IsLit();
+        return spaces[space].IsLit();
     }
 
-    public void UpdateFireflyLocation(string spaceName, GameObject firefly) {
-        Firefly fireflyScript = firefly.GetComponent<Firefly>();
+    public void UpdateFireflyLocation(string spaceName, Firefly firefly) {
+        firefly.location = int.Parse(spaceName);
         
-        //HideGridColor(fireflyScript.location);
-        
-        fireflyScript.location = int.Parse(spaceName);
-        
-        ShowGridColor(fireflyScript.color, fireflyScript.location);
+        ShowGridColor(firefly.GetColorName(), firefly.location);
     }
     
     //
@@ -48,7 +49,7 @@ public class Grid : MonoBehaviour
     //++++++++++++++++++++++++++++
     //
     public void HideGridColor(int location) {
-        if (location == null || location < 0) {
+        if (location < 0) {
             return;
         }
 
@@ -81,9 +82,11 @@ public class Grid : MonoBehaviour
             HideVertical(5);
             HideVertical(8);
         }
+
+        UpdateTargets();
     }
 
-    private void ShowGridColor(Color color, int location) {
+    private void ShowGridColor(ColorName color, int location) {
         //Horizontal
         if (location < 3) {
             ShowHorizontal(0, color);
@@ -113,21 +116,29 @@ public class Grid : MonoBehaviour
             ShowVertical(5, color);
             ShowVertical(8, color);
         }
+
+        UpdateTargets();
     }
 
-    private void ShowVertical(int space, Color color) {
-        spaces[space].GetComponent<GridSpace>().ShowVertical(color);
+    private void ShowVertical(int space, ColorName color) {
+        spaces[space].ShowVertical(color);
     }
 
-    private void ShowHorizontal(int space, Color color) {
-        spaces[space].GetComponent<GridSpace>().ShowHorizontal(color);
+    private void ShowHorizontal(int space, ColorName color) {
+        spaces[space].ShowHorizontal(color);
     }
 
     private void HideVertical(int space) {
-        spaces[space].GetComponent<GridSpace>().HideVertical();
+        spaces[space].HideVertical();
     }
 
     private void HideHorizontal(int space) {
-        spaces[space].GetComponent<GridSpace>().HideHorizontal();
+        spaces[space].HideHorizontal();
+    }
+
+    private void UpdateTargets() {
+        foreach (Target target in targets) {
+            target.SetLight(spaces[target.location].IsLit(), spaces[target.location].GetSpaceColor());
+        }
     }
 }
