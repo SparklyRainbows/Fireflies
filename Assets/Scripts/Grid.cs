@@ -28,19 +28,24 @@ public class Grid : MonoBehaviour
     /// Returns if space is occupied by a firefly or lit by a light beam or occupied by a target
     /// </summary>
     public bool IsSpaceOccupied(int space) {
+        
+        return IsSpaceOccupiedByFireflyOrTarget(space) || spaces[space].IsLit();
+    }
+
+    private bool IsSpaceOccupiedByFireflyOrTarget(int space) {
         foreach (Firefly firefly in fireflies) {
             if (firefly.location == space) {
                 return true;
             }
         }
-        
-        foreach(Target target in targets) {
+
+        foreach (Target target in targets) {
             if (target.location == space) {
                 return true;
             }
         }
 
-        return spaces[space].IsLit();
+        return false;
     }
 
     public void UpdateFireflyLocation(string spaceName, Firefly firefly) {
@@ -67,11 +72,6 @@ public class Grid : MonoBehaviour
         Debug.Log("you win");
     }
     
-    //
-    //++++++++++++++++++++++++++++
-    //FIX ME
-    //++++++++++++++++++++++++++++
-    //
     public void HideGridColor(int location) {
         if (location < 0) {
             return;
@@ -79,10 +79,36 @@ public class Grid : MonoBehaviour
 
         int row = location / size;
         int col = location % size;
-        for (int i = 0; i < size; i++) {
-            HideHorizontal(size * row + i);
-            HideVertical(i * size + col);
+
+        //Horizontal
+        for (int i = col + 1; i < size; i++) {
+            int space = size * row + i;
+            HideHorizontal(space);
+            if (IsSpaceOccupiedByFireflyOrTarget(space))
+                break;
         }
+        for (int i = col - 1; i >= 0; i--) {
+            int space = size * row + i;
+            HideHorizontal(space);
+            if (IsSpaceOccupiedByFireflyOrTarget(space))
+                break;
+        }
+        HideHorizontal(location);
+
+        //Vertical
+        for (int i = row + 1; i < size; i++) {
+            int space = i * size + col;
+            HideVertical(space);
+            if (IsSpaceOccupiedByFireflyOrTarget(space))
+                break;
+        }
+        for (int i = row - 1; i >= 0; i--) {
+            int space = i * size + col;
+            HideVertical(space);
+            if (IsSpaceOccupiedByFireflyOrTarget(space))
+                break;
+        }
+        HideVertical(location);
 
         UpdateTargets();
     }
@@ -90,10 +116,36 @@ public class Grid : MonoBehaviour
     private void ShowGridColor(ColorName color, int location) {
         int row = location / size;
         int col = location % size;
-        for (int i = 0; i < size; i++) {
-            ShowHorizontal(size * row + i, color);
-            ShowVertical(i * size + col, color);
+
+        //Horizontal
+        for (int i = col + 1; i < size; i++) {
+            int space = size * row + i;
+            ShowHorizontal(space, color);
+            if (IsSpaceOccupiedByFireflyOrTarget(space))
+                break;
         }
+        for (int i = col - 1; i >= 0; i--) {
+            int space = size * row + i;
+            ShowHorizontal(space, color);
+            if (IsSpaceOccupiedByFireflyOrTarget(space))
+                break;
+        }
+        ShowHorizontal(location, color);
+
+        //Vertical
+        for (int i = row + 1; i < size; i++) {
+            int space = i * size + col;
+            ShowVertical(space, color);
+            if (IsSpaceOccupiedByFireflyOrTarget(space))
+                break;
+        }
+        for (int i = row - 1; i >= 0; i--) {
+            int space = i * size + col;
+            ShowVertical(space, color);
+            if (IsSpaceOccupiedByFireflyOrTarget(space))
+                break;
+        }
+        ShowVertical(location, color);
 
         UpdateTargets();
     }
