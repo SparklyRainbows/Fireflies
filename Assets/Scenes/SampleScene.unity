@@ -385,6 +385,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
+        type: 3}
+      propertyPath: color.r
+      value: 0.9528302
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
+        type: 3}
+      propertyPath: color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
+        type: 3}
+      propertyPath: color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
+        type: 3}
+      propertyPath: location
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4299934222809680117, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -463,21 +483,6 @@ PrefabInstance:
     - target: {fileID: 4299934222809680118, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
         type: 3}
       propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
-        type: 3}
-      propertyPath: color.r
-      value: 0.9528302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
-        type: 3}
-      propertyPath: color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
-        type: 3}
-      propertyPath: color.g
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -577,6 +582,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
+        type: 3}
+      propertyPath: color.r
+      value: 0.33819866
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
+        type: 3}
+      propertyPath: color.b
+      value: 0.9433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
+        type: 3}
+      propertyPath: color.g
+      value: 0.47665736
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
+        type: 3}
+      propertyPath: location
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4299934222809680117, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -656,21 +681,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.8490566
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
-        type: 3}
-      propertyPath: color.r
-      value: 0.33819866
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
-        type: 3}
-      propertyPath: color.b
-      value: 0.9433962
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299934222809680115, guid: 145db0b7a6e60f44b93a2c4aec90ed4f,
-        type: 3}
-      propertyPath: color.g
-      value: 0.47665736
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 145db0b7a6e60f44b93a2c4aec90ed4f, type: 3}
@@ -1371,6 +1381,11 @@ PrefabInstance:
     - target: {fileID: 1477446210200391564, guid: fbcdba9f1f2ed434d8bfb4819983a4b8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518757181713054279, guid: fbcdba9f1f2ed434d8bfb4819983a4b8,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Firefly : MonoBehaviour
 {
-    public int location;
+    public int location = -1;
     public Color color = Color.red;
 
     float distance;

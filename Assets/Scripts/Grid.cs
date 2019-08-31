@@ -48,6 +48,10 @@ public class Grid : MonoBehaviour
     //++++++++++++++++++++++++++++
     //
     public void HideGridColor(int location) {
+        if (location == null || location < 0) {
+            return;
+        }
+
         //Horizontal
         if (location < 3) {
             HideHorizontal(0);

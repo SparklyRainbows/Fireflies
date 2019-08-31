@@ -33,10 +33,4 @@ public class GridSpace : MonoBehaviour
     public void HideVertical() {
         vertical.enabled = false;
     }
-
-    private void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Firefly") && !collision.gameObject.GetComponent<Firefly>().IsDragging()) {
-            //Grid.instance.UpdateFireflyLocation(gameObject.name, collision.gameObject);
-        }
-    }
 }
