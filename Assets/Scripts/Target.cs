@@ -35,9 +35,12 @@ public class Target : MonoBehaviour
             return;
         }
 
-        if (spaceColor == myColor.GetColor())
+        if (spaceColor == myColor.GetColor()) {
             correctSprite.enabled = true;
-        else
+            incorrectSprite.enabled = false;
+        } else {
             incorrectSprite.enabled = true;
+            correctSprite.enabled = false;
+        }
     }
 }
