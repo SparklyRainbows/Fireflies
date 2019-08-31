@@ -22,6 +22,9 @@ public class Target : MonoBehaviour
             case ("RedTarget"):
                 myColor = new MyColor(ColorName.RED);
                 return;
+            case ("BlueTarget"):
+                myColor = new MyColor(ColorName.BLUE);
+                return;
             default:
                 Debug.LogWarning($"Target name not found: {gameObject.name}");
                 return;
@@ -42,5 +45,9 @@ public class Target : MonoBehaviour
             incorrectSprite.enabled = true;
             correctSprite.enabled = false;
         }
+    }
+
+    public bool IsLitCorrectly() {
+        return correctSprite.enabled;
     }
 }

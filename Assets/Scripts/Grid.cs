@@ -10,12 +10,18 @@ public class Grid : MonoBehaviour
     public List<Firefly> fireflies;
     public List<Target> targets;
 
+    int size;
+
     void Awake() {
         if (instance == null) {
             instance = this;
         } else if (instance != this) {
             Destroy(gameObject);
         }
+    }
+
+    private void Start() {
+        size = (int)Mathf.Sqrt(spaces.Length);
     }
 
     /// <summary>
@@ -41,6 +47,24 @@ public class Grid : MonoBehaviour
         firefly.location = int.Parse(spaceName);
         
         ShowGridColor(firefly.GetColorName(), firefly.location);
+
+        CheckForWin();
+    }
+
+    private void CheckForWin() {
+        //Check if each space is occupied by firefly, target, or light
+        for (int i = 0; i < spaces.Length; i++) {
+            if (!IsSpaceOccupied(i))
+                return;
+        }
+
+        //Check if each target is lit correctly
+        foreach (Target target in targets) {
+            if (!target.IsLitCorrectly())
+                return;
+        }
+
+        Debug.Log("you win");
     }
     
     //
@@ -53,68 +77,22 @@ public class Grid : MonoBehaviour
             return;
         }
 
-        //Horizontal
-        if (location < 3) {
-            HideHorizontal(0);
-            HideHorizontal(1);
-            HideHorizontal(2);
-        } else if (location < 6) {
-            HideHorizontal(3);
-            HideHorizontal(4);
-            HideHorizontal(5);
-        } else {
-            HideHorizontal(6);
-            HideHorizontal(7);
-            HideHorizontal(8);
-        }
-
-        //Vertical
-        if (location % 3 == 0) {
-            HideVertical(0);
-            HideVertical(3);
-            HideVertical(6);
-        } else if (location % 3 == 1) {
-            HideVertical(1);
-            HideVertical(4);
-            HideVertical(7);
-        } else {
-            HideVertical(2);
-            HideVertical(5);
-            HideVertical(8);
+        int row = location / size;
+        int col = location % size;
+        for (int i = 0; i < size; i++) {
+            HideHorizontal(size * row + i);
+            HideVertical(i * size + col);
         }
 
         UpdateTargets();
     }
 
     private void ShowGridColor(ColorName color, int location) {
-        //Horizontal
-        if (location < 3) {
-            ShowHorizontal(0, color);
-            ShowHorizontal(1, color);
-            ShowHorizontal(2, color);
-        } else if (location < 6) {
-            ShowHorizontal(3, color);
-            ShowHorizontal(4, color);
-            ShowHorizontal(5, color);
-        } else {
-            ShowHorizontal(6, color);
-            ShowHorizontal(7, color);
-            ShowHorizontal(8, color);
-        }
-
-        //Vertical
-        if (location % 3 == 0) {
-            ShowVertical(0, color);
-            ShowVertical(3, color);
-            ShowVertical(6, color);
-        } else if (location % 3 == 1) {
-            ShowVertical(1, color);
-            ShowVertical(4, color);
-            ShowVertical(7, color);
-        } else {
-            ShowVertical(2, color);
-            ShowVertical(5, color);
-            ShowVertical(8, color);
+        int row = location / size;
+        int col = location % size;
+        for (int i = 0; i < size; i++) {
+            ShowHorizontal(size * row + i, color);
+            ShowVertical(i * size + col, color);
         }
 
         UpdateTargets();
