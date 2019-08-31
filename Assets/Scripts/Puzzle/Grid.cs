@@ -6,9 +6,13 @@ public class Grid : MonoBehaviour
 {
     public static Grid instance = null;
 
-    public GridSpace[] spaces;
-    public List<Firefly> fireflies;
-    public List<Target> targets;
+    public GameObject gridSpace;
+    public GameObject firefly;
+    public GameObject target;
+
+    GridSpace[] spaces;
+    List<Firefly> fireflies;
+    List<Target> targets;
 
     int size;
 
@@ -21,7 +25,24 @@ public class Grid : MonoBehaviour
     }
 
     private void Start() {
-        size = (int)Mathf.Sqrt(spaces.Length);
+        GameControl gc = GameObject.Find("GameControl").GetComponent<GameControl>();
+
+        size = gc.gridSize;
+        CreateGrid();
+        CreateFireflies();
+        CreateTargets();
+    }
+
+    private void CreateGrid() {
+
+    }
+
+    private void CreateFireflies() {
+
+    }
+
+    private void CreateTargets() {
+
     }
 
     /// <summary>
