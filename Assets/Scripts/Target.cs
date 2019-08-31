@@ -25,6 +25,9 @@ public class Target : MonoBehaviour
             case ("BlueTarget"):
                 myColor = new MyColor(ColorName.BLUE);
                 return;
+            case ("YellowTarget"):
+                myColor = new MyColor(ColorName.YELLOW);
+                return;
             default:
                 Debug.LogWarning($"Target name not found: {gameObject.name}");
                 return;

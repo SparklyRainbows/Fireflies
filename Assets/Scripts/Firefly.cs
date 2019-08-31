@@ -10,6 +10,8 @@ public class Firefly : MonoBehaviour
     float distance;
     bool dragging;
 
+    bool snapped;
+
     Vector3 originalPos;
 
     Transform transform;
@@ -40,6 +42,8 @@ public class Firefly : MonoBehaviour
     }
 
     private void OnMouseDown() {
+        snapped = false;
+
         Grid.instance.HideGridColor(location);
 
         originalPos = transform.position;
@@ -66,7 +70,7 @@ public class Firefly : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        if (dragging)
+        if (dragging || snapped)
             return;
 
         int space = int.Parse(collision.gameObject.name);
@@ -82,6 +86,8 @@ public class Firefly : MonoBehaviour
     private void Snap(GameObject obj) {
         var currentPos = obj.transform.position;
         transform.position = new Vector3(Mathf.Round(currentPos.x), Mathf.Round(currentPos.y), Mathf.Round(currentPos.z));
+
+        snapped = true;
     }
 
     public bool IsDragging() {
