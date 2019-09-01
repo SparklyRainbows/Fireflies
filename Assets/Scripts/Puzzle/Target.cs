@@ -50,20 +50,21 @@ public class Target : MonoBehaviour
     }
 
     public void SetLight(bool isLit, ColorName spaceColor) {
+        if (MyColor.ToColor(spaceColor) == myColor.GetColor()) {
+            correctSprite.enabled = true;
+            incorrectSprite.enabled = false;
+            return;
+        }
+
         //If space isn't lit up or if the color is a composite of the target, don't do anything
-        if (!isLit || MyColor.IsComposite(myColor.GetColorName(), spaceColor)) {
+        if (!isLit || (MyColor.IsComposite(myColor.GetColorName(), spaceColor))) {
             correctSprite.enabled = false;
             incorrectSprite.enabled = false;
             return;
         }
 
-        if (MyColor.ToColor(spaceColor) == myColor.GetColor()) {
-            correctSprite.enabled = true;
-            incorrectSprite.enabled = false;
-        } else {
-            incorrectSprite.enabled = true;
-            correctSprite.enabled = false;
-        }
+        incorrectSprite.enabled = true;
+        correctSprite.enabled = false;
     }
 
     public bool IsLitCorrectly() {
