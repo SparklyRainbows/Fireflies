@@ -84,13 +84,13 @@ public class MyColor
             case (ColorName.YELLOW):
                 return Color.yellow;
             case (ColorName.VIOLET):
-                return Color.cyan;
+                return new Color(171, 0, 162);
             case (ColorName.ORANGE):
-                return Color.magenta;
+                return new Color(245, 143, 0);
             case (ColorName.GREEN):
                 return Color.green;
             case (ColorName.BROWN):
-                return Color.gray;
+                return new Color(102, 60, 0);
             case (ColorName.NONE):
                 return Color.white;
             default:
