@@ -9,6 +9,18 @@ public class SceneManagement : MonoBehaviour
         LoadLevel(GameControl.instance.level);
     }
 
+    public void LoadLevelSelect() {
+        SceneManager.LoadScene("LevelSelection");
+    }
+
+    public void Quit() {
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+		        Application.Quit ();
+        #endif
+    }
+
     public void LoadLevel(int level) {
         GameControl.instance.level = level;
 
