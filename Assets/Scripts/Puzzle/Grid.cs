@@ -94,7 +94,7 @@ public class Grid : MonoBehaviour
     private void CreateFireflies(List<ColorName> fireflyColors) {
         fireflies = new List<Firefly>();
 
-        float yPos = 3f;
+        float yPos = 4f;
         foreach (ColorName fireflyColor in fireflyColors) {
             GameObject temp = CreateFirefly(fireflyColor, yPos);
             fireflies.Add(temp.GetComponent<Firefly>());
