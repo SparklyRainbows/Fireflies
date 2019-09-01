@@ -147,6 +147,10 @@ public class Grid : MonoBehaviour
             }
         }
 
+        return IsSpaceOccupiedByTarget(space);
+    }
+
+    private bool IsSpaceOccupiedByTarget(int space) {
         foreach (Target target in targets) {
             if (target.location == space) {
                 return true;
@@ -199,12 +203,24 @@ public class Grid : MonoBehaviour
         //Horizontal
         for (int i = col + 1; i < size; i++) {
             int space = size * row + i;
+
+            if (IsSpaceOccupiedByTarget(space)) {
+                HideLeft(space);
+                break;
+            }
+
             HideHorizontal(space);
             if (IsSpaceOccupiedByFireflyOrTarget(space))
                 break;
         }
         for (int i = col - 1; i >= 0; i--) {
             int space = size * row + i;
+
+            if (IsSpaceOccupiedByTarget(space)) {
+                HideRight(space);
+                break;
+            }
+
             HideHorizontal(space);
             if (IsSpaceOccupiedByFireflyOrTarget(space))
                 break;
@@ -214,12 +230,24 @@ public class Grid : MonoBehaviour
         //Vertical
         for (int i = row + 1; i < size; i++) {
             int space = i * size + col;
+
+            if (IsSpaceOccupiedByTarget(space)) {
+                HideUp(space);
+                break;
+            }
+
             HideVertical(space);
             if (IsSpaceOccupiedByFireflyOrTarget(space))
                 break;
         }
         for (int i = row - 1; i >= 0; i--) {
             int space = i * size + col;
+
+            if (IsSpaceOccupiedByTarget(space)) {
+                HideDown(space);
+                break;
+            }
+
             HideVertical(space);
             if (IsSpaceOccupiedByFireflyOrTarget(space))
                 break;
@@ -236,12 +264,24 @@ public class Grid : MonoBehaviour
         //Horizontal
         for (int i = col + 1; i < size; i++) {
             int space = size * row + i;
+
+            if (IsSpaceOccupiedByTarget(space)) {
+                ShowLeft(space, color);
+                break;
+            }
+            
             ShowHorizontal(space, color);
             if (IsSpaceOccupiedByFireflyOrTarget(space))
                 break;
         }
         for (int i = col - 1; i >= 0; i--) {
             int space = size * row + i;
+
+            if (IsSpaceOccupiedByTarget(space)) {
+                ShowRight(space, color);
+                break;
+            }
+
             ShowHorizontal(space, color);
             if (IsSpaceOccupiedByFireflyOrTarget(space))
                 break;
@@ -251,12 +291,24 @@ public class Grid : MonoBehaviour
         //Vertical
         for (int i = row + 1; i < size; i++) {
             int space = i * size + col;
+
+            if (IsSpaceOccupiedByTarget(space)) {
+                ShowUp(space, color);
+                break;
+            }
+
             ShowVertical(space, color);
             if (IsSpaceOccupiedByFireflyOrTarget(space))
                 break;
         }
         for (int i = row - 1; i >= 0; i--) {
             int space = i * size + col;
+
+            if (IsSpaceOccupiedByTarget(space)) {
+                ShowDown(space, color);
+                break;
+            }
+
             ShowVertical(space, color);
             if (IsSpaceOccupiedByFireflyOrTarget(space))
                 break;
@@ -264,6 +316,30 @@ public class Grid : MonoBehaviour
         ShowVertical(location, color);
 
         UpdateTargets();
+    }
+
+    private void HideVertical(int space) {
+        spaces[space].HideVertical();
+    }
+
+    private void HideHorizontal(int space) {
+        spaces[space].HideHorizontal();
+    }
+
+    private void HideLeft(int space) {
+        spaces[space].HideLeft();
+    }
+
+    private void HideRight(int space) {
+        spaces[space].HideRight();
+    }
+
+    private void HideUp(int space) {
+        spaces[space].HideUp();
+    }
+
+    private void HideDown(int space) {
+        spaces[space].HideDown();
     }
 
     private void ShowVertical(int space, ColorName color) {
@@ -274,12 +350,20 @@ public class Grid : MonoBehaviour
         spaces[space].ShowHorizontal(color);
     }
 
-    private void HideVertical(int space) {
-        spaces[space].HideVertical();
+    private void ShowLeft(int space, ColorName color) {
+        spaces[space].ShowLeft(color);
     }
 
-    private void HideHorizontal(int space) {
-        spaces[space].HideHorizontal();
+    private void ShowRight(int space, ColorName color) {
+        spaces[space].ShowRight(color);
+    }
+
+    private void ShowUp(int space, ColorName color) {
+        spaces[space].ShowUp(color);
+    }
+
+    private void ShowDown(int space, ColorName color) {
+        spaces[space].ShowDown(color);
     }
 
     private void UpdateTargets() {
