@@ -41,6 +41,18 @@ public class Firefly : MonoBehaviour
             case ("yellow"):
                 myColor = new MyColor(ColorName.YELLOW);
                 return;
+            case ("violet"):
+                myColor = new MyColor(ColorName.VIOLET);
+                return;
+            case ("orange"):
+                myColor = new MyColor(ColorName.ORANGE);
+                return;
+            case ("green"):
+                myColor = new MyColor(ColorName.GREEN);
+                return;
+            case ("brown"):
+                myColor = new MyColor(ColorName.BROWN);
+                return;
             default:
                 Debug.LogWarning($"Firefly name not found: {gameObject.name}");
                 return;
