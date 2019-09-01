@@ -10,6 +10,8 @@ public class SceneManagement : MonoBehaviour
     }
 
     public void LoadLevel(int level) {
+        GameControl.instance.level = level;
+
         switch(level) {
             case (1):
                 LevelOne();
