@@ -10,6 +10,8 @@ public class Firefly : MonoBehaviour
     float distance;
     bool dragging;
 
+    bool canMove = true;
+
     bool snapped;
 
     Vector3 originalPos;
@@ -22,6 +24,10 @@ public class Firefly : MonoBehaviour
         GetComponent<SpriteRenderer>().color = myColor.GetColor();
 
         transform = gameObject.transform;
+    }
+
+    public void Disable() {
+        canMove = false;
     }
 
     private void SetColor() {
@@ -42,6 +48,9 @@ public class Firefly : MonoBehaviour
     }
 
     private void OnMouseDown() {
+        if (!canMove)
+            return;
+
         snapped = false;
 
         Grid.instance.HideGridColor(location);

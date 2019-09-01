@@ -5,10 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
-    GameControl gc;
-
-    private void Start() {
-        gc = GetComponent<GameControl>();
+    public void LoadNextLevel() {
+        LoadLevel(GameControl.instance.level);
     }
 
     public void LoadLevel(int level) {
@@ -48,6 +46,6 @@ public class SceneManagement : MonoBehaviour
             7
         };
 
-        gc.LoadLevel(3, fireflies, targetColors, targetLocations);
+        GameControl.instance.LoadLevel(3, fireflies, targetColors, targetLocations);
     }
 }

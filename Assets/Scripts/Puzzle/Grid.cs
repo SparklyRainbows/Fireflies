@@ -25,15 +25,18 @@ public class Grid : MonoBehaviour
     }
 
     private void Start() {
-        GameControl gc = GameObject.Find("GameControl").GetComponent<GameControl>();
+        GameControl.instance.FindUI();
+        Init();
+    }
 
-        //CreateGrid(gc.gridSize);
-        //CreateFireflies(gc.fireflies);
-        //CreateTargets(gc.targetColors, gc.targetLocations);
+    private void Init() {
+        //CreateGrid(GameControl.instance.gridSize);
+        //CreateFireflies(GameControl.instance.fireflies);
+        //CreateTargets(GameControl.instance.targetColors, GameControl.instance.targetLocations);
         CreateGrid(3);
-        CreateFireflies(new List<ColorName>() { ColorName.RED, ColorName.BLUE, ColorName.RED});
-        CreateTargets(new List<ColorName>() { ColorName.BLUE, ColorName.RED, ColorName.RED},
-            new List<int>() { 2, 5, 7});
+        CreateFireflies(new List<ColorName>() { ColorName.RED, ColorName.BLUE, ColorName.RED });
+        CreateTargets(new List<ColorName>() { ColorName.BLUE, ColorName.RED, ColorName.RED },
+            new List<int>() { 2, 5, 7 });
     }
 
     //Resets firefly positions, removes all light
@@ -174,9 +177,17 @@ public class Grid : MonoBehaviour
                 return;
         }
 
-        Debug.Log("you win");
+        Win();
     }
     
+    private void Win() {
+        GameObject.Find("GameControl").GetComponent<GameControl>().Win();
+
+        foreach(Firefly firefly in fireflies) {
+            firefly.Disable();
+        }
+    }
+
     public void HideGridColor(int location) {
         if (location < 0) {
             return;
