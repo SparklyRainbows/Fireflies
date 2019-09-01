@@ -10,9 +10,13 @@ public class UI : MonoBehaviour
     public GameObject pausePanel;
     public GameObject winPanel;
 
+    public Text levelText;
+
     private void Start() {
         if (GameControl.instance.level == 1)
             tutorialPanel.SetActive(true);
+
+        levelText.text = "Level: " + GameControl.instance.level;
     }
 
     public void HideTutorial() {
