@@ -78,11 +78,11 @@ public class GridSpace : MonoBehaviour
     /// Returns a color if horizontal and vertical share the same color
     /// Otherwise returns Color.white
     /// </summary>
-    public Color GetSpaceColor() {
+    public ColorName GetSpaceColor() {
         List<MyColor> colors = GetColors();
 
         if (colors.Count == 0)
-            return Color.white;
+            return ColorName.NONE;
 
         while (colors.Count > 1) {
             MyColor a = colors[0];
@@ -94,7 +94,7 @@ public class GridSpace : MonoBehaviour
             colors.Add(newColor);
         }
 
-        return colors[0].GetColor();
+        return colors[0].GetColorName();
     }
 
     private List<MyColor> GetColors() {

@@ -10,7 +10,7 @@ public class MyColor
     public MyColor(ColorName colorName) {
         this.colorName = colorName;
 
-        ConvertToColor();
+        color = ToColor(colorName);
     }
 
     public Color GetColor() {
@@ -19,38 +19,6 @@ public class MyColor
 
     public ColorName GetColorName() {
         return colorName;
-    }
-
-    private void ConvertToColor() {
-        switch (colorName) {
-            case (ColorName.RED):
-                color = Color.red;
-                return;
-            case (ColorName.BLUE):
-                color = Color.blue;
-                return;
-            case (ColorName.YELLOW):
-                color = Color.yellow;
-                return;
-            case (ColorName.VIOLET):
-                color = Color.cyan;
-                return;
-            case (ColorName.ORANGE):
-                color = Color.magenta;
-                return;
-            case (ColorName.GREEN):
-                color = Color.green;
-                return;
-            case (ColorName.BROWN):
-                color = Color.gray;
-                return;
-            case (ColorName.NONE):
-                color = Color.white;
-                return;
-            default:
-                Debug.LogError($"Color name not found: {colorName}");
-                return;
-        }
     }
     
     public static MyColor Mix(ColorName a, ColorName b) {
@@ -85,6 +53,50 @@ public class MyColor
         }
 
         return new MyColor(ColorName.BROWN);
+    }
+
+    /// <summary>
+    /// Checks if b can make up a
+    /// </summary>
+    public static bool IsComposite(ColorName mainColor, ColorName compositeColor) {
+        if (mainColor == ColorName.VIOLET &&
+            (compositeColor == ColorName.RED || compositeColor == ColorName.BLUE))
+            return true;
+        if (mainColor == ColorName.GREEN &&
+            (compositeColor == ColorName.YELLOW || compositeColor == ColorName.BLUE))
+            return true;
+        if (mainColor == ColorName.ORANGE &&
+            (compositeColor == ColorName.YELLOW || compositeColor == ColorName.RED))
+            return true;
+
+        if (mainColor == ColorName.BROWN)
+            return true;
+
+        return false;
+    }
+
+    public static Color ToColor(ColorName colorName) {
+        switch (colorName) {
+            case (ColorName.RED):
+                return Color.red;
+            case (ColorName.BLUE):
+                return Color.blue;
+            case (ColorName.YELLOW):
+                return Color.yellow;
+            case (ColorName.VIOLET):
+                return Color.cyan;
+            case (ColorName.ORANGE):
+                return Color.magenta;
+            case (ColorName.GREEN):
+                return Color.green;
+            case (ColorName.BROWN):
+                return Color.gray;
+            case (ColorName.NONE):
+                return Color.white;
+            default:
+                Debug.LogError($"Color name not found: {colorName}");
+                return Color.white;
+        }
     }
 
     public override bool Equals(object obj) {

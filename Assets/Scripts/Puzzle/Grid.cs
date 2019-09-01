@@ -30,14 +30,14 @@ public class Grid : MonoBehaviour
     }
 
     private void Init() {
-        //CreateGrid(GameControl.instance.gridSize);
-        //CreateFireflies(GameControl.instance.fireflies);
-        //CreateTargets(GameControl.instance.targetColors, GameControl.instance.targetLocations);
+        CreateGrid(GameControl.instance.gridSize);
+        CreateFireflies(GameControl.instance.fireflies);
+        CreateTargets(GameControl.instance.targetColors, GameControl.instance.targetLocations);
 
-        CreateGrid(3);
+        /*CreateGrid(3);
         CreateFireflies(new List<ColorName>() { ColorName.RED, ColorName.BLUE, ColorName.RED });
         CreateTargets(new List<ColorName>() { ColorName.BLUE, ColorName.RED, ColorName.RED },
-            new List<int>() { 2, 5, 7 });
+            new List<int>() { 2, 5, 7 });*/
     }
 
     //Resets firefly positions, removes all light
@@ -57,7 +57,7 @@ public class Grid : MonoBehaviour
 
         //Reset all targets
         foreach (Target target in targets) {
-            target.SetLight(false, Color.white);
+            target.SetLight(false, ColorName.NONE);
         }
     }
 
