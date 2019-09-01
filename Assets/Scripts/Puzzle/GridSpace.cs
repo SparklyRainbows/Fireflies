@@ -12,9 +12,6 @@ public class GridSpace : MonoBehaviour
     Light down;
 
     private void Start() {
-        //horizontal = transform.Find("Horizontal").GetComponent<Light>();
-        //vertical = transform.Find("Vertical").GetComponent<Light>();
-
         left = transform.Find("Left").GetComponent<Light>();
         right = transform.Find("Right").GetComponent<Light>();
         up = transform.Find("Up").GetComponent<Light>();
@@ -82,18 +79,36 @@ public class GridSpace : MonoBehaviour
     /// Otherwise returns Color.white
     /// </summary>
     public Color GetSpaceColor() {
-        //If all beams are active
-        if (left.IsEnabled() && right.IsEnabled() && up.IsEnabled() && down.IsEnabled()) {
-            if (left.GetColor() == right.GetColor() && right.GetColor() == up.GetColor() && up.GetColor() == down.GetColor())
-                return left.GetColor();
+        List<MyColor> colors = GetColors();
+
+        if (colors.Count == 0)
+            return Color.white;
+
+        while (colors.Count > 1) {
+            MyColor a = colors[0];
+            MyColor b = colors[1];
+            colors.Remove(a);
+            colors.Remove(b);
+
+            MyColor newColor = MyColor.Mix(a.GetColorName(), b.GetColorName());
+            colors.Add(newColor);
         }
 
+        return colors[0].GetColor();
+    }
+
+    private List<MyColor> GetColors() {
+        List<MyColor> colors = new List<MyColor>();
+
         if (left.IsEnabled())
-            return left.GetColor();
+            colors.Add(left.GetMyColor());
+        if (right.IsEnabled() && !colors.Contains(right.GetMyColor()))
+            colors.Add(right.GetMyColor());
+        if (up.IsEnabled() && !colors.Contains(up.GetMyColor()))
+            colors.Add(up.GetMyColor());
+        if (down.IsEnabled() && !colors.Contains(down.GetMyColor()))
+            colors.Add(down.GetMyColor());
 
-        if (up.IsEnabled())
-            return up.GetColor();
-
-        return Color.white;
+        return colors;
     }
 }

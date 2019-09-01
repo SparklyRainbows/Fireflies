@@ -29,4 +29,12 @@ public class Light : MonoBehaviour
     public Color GetColor() {
         return myColor.GetColor();
     }
+
+    public ColorName GetColorName() {
+        return myColor.GetColorName();
+    }
+
+    public MyColor GetMyColor() {
+        return myColor;
+    }
 }
