@@ -5,13 +5,21 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    public GameObject panel;
+    public GameObject solvedPanel;
+    public GameObject tutorialPanel;
 
     private void Start() {
-        panel.SetActive(false);
+        solvedPanel.SetActive(false);
+
+        if (GameControl.instance.level == 1)
+            tutorialPanel.SetActive(true);
+    }
+
+    public void HideTutorial() {
+        tutorialPanel.SetActive(false);
     }
 
     public void ShowPanel() {
-        panel.SetActive(true);
+        solvedPanel.SetActive(true);
     }
 }
