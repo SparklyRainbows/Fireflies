@@ -26,6 +26,18 @@ public class Target : MonoBehaviour
             case ("yellowTarget"):
                 SetColor(ColorName.YELLOW);
                 return;
+            case ("violetTarget"):
+                SetColor(ColorName.VIOLET);
+                return;
+            case ("orangeTarget"):
+                SetColor(ColorName.ORANGE);
+                return;
+            case ("greenTarget"):
+                SetColor(ColorName.GREEN);
+                return;
+            case ("brownTarget"):
+                SetColor(ColorName.BROWN);
+                return;
             default:
                 Debug.LogWarning($"Target name not found: {gameObject.name}");
                 return;

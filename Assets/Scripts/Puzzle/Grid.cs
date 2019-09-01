@@ -33,6 +33,7 @@ public class Grid : MonoBehaviour
         //CreateGrid(GameControl.instance.gridSize);
         //CreateFireflies(GameControl.instance.fireflies);
         //CreateTargets(GameControl.instance.targetColors, GameControl.instance.targetLocations);
+
         CreateGrid(3);
         CreateFireflies(new List<ColorName>() { ColorName.RED, ColorName.BLUE, ColorName.RED });
         CreateTargets(new List<ColorName>() { ColorName.BLUE, ColorName.RED, ColorName.RED },

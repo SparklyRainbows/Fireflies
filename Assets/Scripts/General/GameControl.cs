@@ -28,6 +28,10 @@ public class GameControl : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start() {
+        level = 1;
+    }
+
     public void FindUI() {
         ui = GameObject.Find("Canvas").GetComponent<UI>();
     }
