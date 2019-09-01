@@ -44,7 +44,12 @@ public class GameControl : MonoBehaviour
     }
 
     public void Win() {
-        ui.ShowPanel();
+        ui.ToggleSolvedPanel(true);
         level++;
+    }
+
+    public void WinGame() {
+        ui.ToggleSolvedPanel(false);
+        ui.ShowWinPanel();
     }
 }

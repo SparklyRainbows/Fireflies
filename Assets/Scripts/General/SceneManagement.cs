@@ -13,6 +13,10 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene("LevelSelection");
     }
 
+    public void LoadMainMenu() {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void Quit() {
         #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
@@ -23,6 +27,8 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadLevel(int level) {
         GameControl.instance.level = level;
+
+        Debug.Log("loading level " + level);
 
         switch(level) {
             case (1):
@@ -38,7 +44,7 @@ public class SceneManagement : MonoBehaviour
                 LevelFour();
                 break;
             default:
-                Debug.LogWarning($"Level not set up: level {level}");
+                GameControl.instance.WinGame();
                 return;
         }
 

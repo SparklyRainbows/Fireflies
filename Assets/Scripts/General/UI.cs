@@ -7,10 +7,10 @@ public class UI : MonoBehaviour
 {
     public GameObject solvedPanel;
     public GameObject tutorialPanel;
+    public GameObject pausePanel;
+    public GameObject winPanel;
 
     private void Start() {
-        solvedPanel.SetActive(false);
-
         if (GameControl.instance.level == 1)
             tutorialPanel.SetActive(true);
     }
@@ -19,7 +19,15 @@ public class UI : MonoBehaviour
         tutorialPanel.SetActive(false);
     }
 
-    public void ShowPanel() {
-        solvedPanel.SetActive(true);
+    public void TogglePausePanel(bool active) {
+        pausePanel.SetActive(active);
+    }
+
+    public void ShowWinPanel() {
+        winPanel.SetActive(true);
+    }
+
+    public void ToggleSolvedPanel(bool active) {
+        solvedPanel.SetActive(active);
     }
 }
