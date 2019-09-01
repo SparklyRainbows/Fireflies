@@ -43,10 +43,10 @@ public class Grid : MonoBehaviour
     //Resets firefly positions, removes all light
     public void Reset() {
         //Reset firefly position
-        float yPos = 3f;
+        float yPos = 4f;
         foreach (Firefly firefly in fireflies) {
             firefly.gameObject.transform.localPosition = new Vector2(5, yPos);
-            yPos -= 1.5f;
+            yPos -= (1.3f - (size - 3) * .1f);
         }
 
         //Remove all light
@@ -98,13 +98,14 @@ public class Grid : MonoBehaviour
         foreach (ColorName fireflyColor in fireflyColors) {
             GameObject temp = CreateFirefly(fireflyColor, yPos);
             fireflies.Add(temp.GetComponent<Firefly>());
-            yPos -= 1.5f;
+            yPos -= (1.3f - (size - 3) * .1f);
         }
     }
 
     private GameObject CreateFirefly(ColorName fireflyColor, float yPos) {
         GameObject temp = Instantiate(firefly, GameObject.Find("Fireflies").transform);
 
+        temp.transform.localScale = new Vector2(5f / size, 5f / size);
         temp.transform.localPosition = new Vector2(5, yPos);
         temp.name = fireflyColor.ToString().ToLower();
 
@@ -126,7 +127,8 @@ public class Grid : MonoBehaviour
 
     private GameObject CreateTarget(ColorName targetColor, int position) {
         GameObject temp = Instantiate(target, GameObject.Find("Targets").transform);
-        
+
+        temp.transform.localScale = new Vector2(5f / size, 5f / size);
         temp.transform.localPosition = spaces[position].gameObject.transform.position;
         temp.name = targetColor.ToString().ToLower() + "Target";
 

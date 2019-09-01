@@ -22,6 +22,9 @@ public class SceneManagement : MonoBehaviour
             case (3):
                 LevelThree();
                 break;
+            case (4):
+                LevelFour();
+                break;
             default:
                 Debug.LogWarning($"Level not set up: level {level}");
                 return;
@@ -102,5 +105,38 @@ public class SceneManagement : MonoBehaviour
         };
 
         GameControl.instance.LoadLevel(5, fireflies, targetColors, targetLocations);
+    }
+
+    private void LevelFour() {
+        List<ColorName> fireflies = new List<ColorName>() {
+            ColorName.RED,
+            ColorName.ORANGE,
+            ColorName.YELLOW,
+            ColorName.GREEN,
+            ColorName.BLUE,
+            ColorName.BLUE,
+            ColorName.VIOLET
+        };
+
+        List<ColorName> targetColors = new List<ColorName>() {
+            ColorName.RED,
+            ColorName.YELLOW,
+            ColorName.VIOLET,
+            ColorName.BLUE,
+            ColorName.BROWN,
+            ColorName.GREEN,
+            ColorName.GREEN
+        };
+        List<int> targetLocations = new List<int>() {
+            4,
+            7,
+            21,
+            24,
+            27,
+            41,
+            44
+        };
+
+        GameControl.instance.LoadLevel(7, fireflies, targetColors, targetLocations);
     }
 }
